@@ -22,14 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        // no defini el root al cambiar el binding LOL!!!!
         setContentView(binding.root)
         initRecyclerView()
         canciones()
     }
 
     private fun initRecyclerView() {
-        Log.d("TEST","SUFFLE: "+ Arrays.toString(cancionesList.toTypedArray()))
+        //Log.d("TEST","SUFFLE: "+ Arrays.toString(cancionesList.toTypedArray()))
         adapter = CancionAdapter(cancionesList)
         binding.rvCanciones.layoutManager = LinearLayoutManager(this)
         binding.rvCanciones.adapter = adapter
@@ -42,12 +41,22 @@ class MainActivity : AppCompatActivity() {
             val objcancion = can.body()!!
             runOnUiThread{
                 if(can.isSuccessful){
-                    val clist = objcancion
+                    val clist = fillList(objcancion)
                     cancionesList.clear()
                     cancionesList.addAll(clist)
                     adapter.notifyDataSetChanged()
                 }
             }
         }
+    }
+
+    fun fillList(list: List<CancionData>):MutableList<CancionData>{
+        val _res = mutableListOf<CancionData>()
+        for(item:CancionData in list){
+            if(!item.artista.isNullOrEmpty()){
+                _res.add(item)
+            }
+        }
+        return _res
     }
 }

@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DIP/apilaravel/app/src/main/res/drawable/bg_header.xml" value="0.351" />
+        <entry key="..\:/DIP/apilaravel/app/src/main/res/drawable/bg_item.xml" value="0.197" />
+        <entry key="..\:/DIP/apilaravel/app/src/main/res/drawable/ic_more.xml" value="0.198" />
+        <entry key="..\:/DIP/apilaravel/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/DIP/apilaravel/app/src/main/res/layout/item.xml" value="0.3419257012888552" />
         <entry key="..\:/Diplomado/apilaravel/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Diplomado/apilaravel/app/src/main/res/layout/item.xml" value="0.5" />
         <entry key="..\:/Users/DanielSan/AndroidStudioProjects/apilaravel/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
