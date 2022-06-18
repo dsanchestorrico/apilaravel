@@ -1,5 +1,6 @@
 package com.apilaravel
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,9 +15,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter:CancionAdapter
+    private lateinit var adapter: CancionAdapter
     private val cancionesList = mutableListOf<CancionData>()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +24,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecyclerView()
+        canciones()
+        binding.listMusicButton.setOnClickListener {
+            canciones()
+        }
+
+        binding.newCancionFAB.setOnClickListener {
+            startActivity(Intent(this@MainActivity, DetalleCancionActivity::class.java))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         canciones()
     }
 
@@ -34,13 +46,13 @@ class MainActivity : AppCompatActivity() {
         binding.rvCanciones.adapter = adapter
     }
 
-    fun canciones(){
+    fun canciones() {
         CoroutineScope(Dispatchers.IO).launch {
-            val can: Response<List<CancionData>>
-            can = CancionObject.getCancion().create(CancionApi::class.java).obtenerCanciones()
+            val can: Response<List<CancionData>> =
+                CancionObject.ApiAdapter().obtenerCanciones()
             val objcancion = can.body()!!
-            runOnUiThread{
-                if(can.isSuccessful){
+            runOnUiThread {
+                if (can.isSuccessful) {
                     val clist = fillList(objcancion)
                     cancionesList.clear()
                     cancionesList.addAll(clist)
@@ -50,10 +62,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun fillList(list: List<CancionData>):MutableList<CancionData>{
+    fun fillList(list: List<CancionData>): MutableList<CancionData> {
         val _res = mutableListOf<CancionData>()
-        for(item:CancionData in list){
-            if(!item.artista.isNullOrEmpty()){
+        for (item: CancionData in list) {
+            if (!item.artista.isNullOrEmpty()) {
                 _res.add(item)
             }
         }
