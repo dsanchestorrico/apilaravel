@@ -1,17 +1,19 @@
 package com.apilaravel
 
+import java.io.Serializable
+
 data class CancionData(
     val id: Int? = 0,
-    val archivo: String? = "",
-    val artista: String? = "",
-    val titulo: String? = "",
-    val album: String? = "",
-    val year: String? = "",
-    val formato: String? = "",
-    val genero: String? = "",
-    val image: String? = "",
-    val duracion: String? = "",
-    val numero_reproduccion: String? = "",
-    val created_at: String? = "",
-    val updated_at: String? = "",
-)
+    var archivo: String? = "",
+    var artista: String? = "",
+    var titulo: String? = "",
+    var album: String? = "",
+    var year: String? = "",
+    var formato: String? = "",
+    var genero: String? = "",
+    var image: String? = "",
+    var duracion: String? = "",
+    var numero_reproduccion: String? = "",
+    var created_at: String? = "",
+    var updated_at: String? = "",
+): Serializable

@@ -1,6 +1,5 @@
 package com.apilaravel
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +17,5 @@ class CancionAdapter(val canciones:List<CancionData>): RecyclerView.Adapter<Canc
     }
 
     override fun getItemCount(): Int  = canciones.size
-
 
 }

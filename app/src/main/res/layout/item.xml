@@ -16,7 +16,7 @@
         android:layout_height="80dp"
         android:background="@color/app_bg_item"
         android:layout_gravity="center"
-    >
+        >
         <ImageView
             android:id="@+id/ivCover"
             android:layout_width="80dp"
@@ -41,7 +41,7 @@
             <TextView
                 android:id="@+id/tvTitle"
                 android:text="TITULO"
-               style="@style/title_style"
+                style="@style/title_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />

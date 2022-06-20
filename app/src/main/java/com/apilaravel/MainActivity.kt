@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         binding.newCancionFAB.setOnClickListener {
             startActivity(Intent(this@MainActivity, DetalleCancionActivity::class.java))
         }
+
     }
 
     override fun onResume() {
