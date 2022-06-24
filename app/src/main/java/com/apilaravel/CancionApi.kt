@@ -9,7 +9,6 @@ interface CancionApi {
     @GET("api/cancion")
     suspend fun obtenerCanciones(): Response<List<CancionData>>
 
-
     @POST("api/cancion")
     suspend fun saveCancion(@Body cancion: CancionData): Response<Void>
     //suspend esta muy relacionada con las coroutine (2  procesos en ejecucion paralelamente)

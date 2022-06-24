@@ -34,61 +34,10 @@ class CancionViewHolder (val view: View, val listener:IOnItemClickListener): Rec
         binding.ivCover.setImageResource(listCovers[cover])
         binding.tvArtista.text = cancion.artista
         binding.tvTitle.text = cancion.titulo
-        /* binding.mbMore.setOnClickListener { view ->
-             showMoreActionsMenu(view, cancion)
-         }*/
-
         binding.mbRemove.setOnClickListener{
             listener.onItemClick(cancion, "delete", position)
-            //Toast.makeText(view.context, "delete", Toast.LENGTH_SHORT).show()
-
         }
 
-    }
-
-
-    private fun showMoreActionsMenu(button: View, cancion:CancionData){
-        val popupMenu = PopupMenu(this.view.context, button)
-        popupMenu.menuInflater.inflate(R.menu.card_menu, popupMenu.menu)
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem): Boolean {
-                return when(item.itemId){
-                    R.id.editar -> {
-                        var intent = Intent(view.context, DetalleCancionActivity::class.java)
-                        intent.putExtra("cancion", cancion)
-                        view.context.startActivity(intent)
-                        true
-                    }
-                    R.id.eliminar -> {
-                        //showMessage(item.title)
-                        var dialog = AlertDialog.Builder(view.context)
-                        dialog.setTitle("CONFIRMAR")
-                        dialog.setMessage("Eliminar cancion ${cancion.titulo} de ${cancion.artista}?")
-                        dialog.setPositiveButton("Si", object : DialogInterface.OnClickListener{
-                            override fun onClick(p0: DialogInterface?, p1: Int) {
-                                if(cancion != null) {
-                                    CoroutineScope(Dispatchers.IO).launch {
-                                        val response: Response<Void> = CancionObject.ApiAdapter().deleteCancion(cancion!!.id)
-                                        runOnUiThread {
-                                            if (response.isSuccessful) {
-                                                //notifyDataSetChanged()
-                                                p0!!.dismiss()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                        dialog.setNegativeButton("Cancelar", null)
-                        dialog.show()
-                        true
-                    }
-                    else -> false
-                }
-            }
-        })
-
-        popupMenu.show()
     }
 
     private fun showMessage(title: CharSequence) {
@@ -96,6 +45,3 @@ class CancionViewHolder (val view: View, val listener:IOnItemClickListener): Rec
     }
 }
 
-private fun CoroutineScope.runOnUiThread(function: () -> Unit) {
-
-}
