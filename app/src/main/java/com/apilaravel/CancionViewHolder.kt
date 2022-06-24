@@ -19,6 +19,7 @@ class CancionViewHolder (val view: View, val listener:IOnItemClickListener): Rec
     private val binding = ItemBinding.bind(view)
 
     var listCovers = listOf<Int>(
+        R.drawable.c00,
         R.drawable.c01,
         R.drawable.c02,
         R.drawable.c03,
@@ -31,7 +32,7 @@ class CancionViewHolder (val view: View, val listener:IOnItemClickListener): Rec
 
     fun bind(cancion:CancionData, position:Int){
         val cover = (0..7).random()
-        binding.ivCover.setImageResource(listCovers[cover])
+        binding.ivCover.setImageResource(listCovers[0])
         binding.tvArtista.text = cancion.artista
         binding.tvTitle.text = cancion.titulo
         binding.mbRemove.setOnClickListener{
