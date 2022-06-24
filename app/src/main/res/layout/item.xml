@@ -66,24 +66,18 @@
             <ImageView
                 android:id="@+id/mbHeart"
                 style="@style/action_style"
-                android:src="@drawable/ic_fav"
+                android:src="@drawable/ic_action_edit"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 />
+
             <ImageView
                 android:id="@+id/mbRemove"
                 style="@style/action_style"
-                android:src="@drawable/ic_remove"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/mbHeart"
-                android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:id="@+id/mbMore"
-                style="@style/action_style"
-                android:src="@drawable/ic_more"
-                android:layout_toEndOf="@+id/mbRemove"
-                android:layout_centerVertical="true"
-                />
+                android:src="@drawable/ic_action_delete" />
+
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
