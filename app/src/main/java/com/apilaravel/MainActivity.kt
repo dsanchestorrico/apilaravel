@@ -3,15 +3,13 @@ package com.apilaravel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apilaravel.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +43,12 @@ class MainActivity : AppCompatActivity() {
         adapter = CancionAdapter(cancionesList)
         binding.rvCanciones.layoutManager = LinearLayoutManager(this)
         binding.rvCanciones.adapter = adapter
+
+        adapter.setOnClickListener(object:IOnItemClickListener{
+            override fun onItemClick(cancion: CancionData, accion: String, position:Int) {
+                eliminarCancion(cancion, position)
+            }
+        })
     }
 
     fun canciones() {
@@ -71,5 +75,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return _res
+    }
+
+    fun eliminarCancion(cancion:CancionData, position:Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response: Response<Void> = CancionObject.ApiAdapter().deleteCancion(cancion!!.id)
+            runOnUiThread {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@MainActivity, "Se elimino: ${cancion.artista}", Toast.LENGTH_SHORT).show()
+                    canciones()
+                }
+            }
+        }
     }
 }

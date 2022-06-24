@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class CancionViewHolder (val view: View): RecyclerView.ViewHolder(view){
+class CancionViewHolder (val view: View, val listener:IOnItemClickListener): RecyclerView.ViewHolder(view){
 
     private val binding = ItemBinding.bind(view)
 
@@ -29,16 +29,23 @@ class CancionViewHolder (val view: View): RecyclerView.ViewHolder(view){
         R.drawable.c08,
     )
 
-
-    fun bind(cancion:CancionData){
+    fun bind(cancion:CancionData, position:Int){
         val cover = (0..7).random()
         binding.ivCover.setImageResource(listCovers[cover])
         binding.tvArtista.text = cancion.artista
         binding.tvTitle.text = cancion.titulo
-        binding.mbMore.setOnClickListener { view ->
-            showMoreActionsMenu(view, cancion)
+        /* binding.mbMore.setOnClickListener { view ->
+             showMoreActionsMenu(view, cancion)
+         }*/
+
+        binding.mbRemove.setOnClickListener{
+            listener.onItemClick(cancion, "delete", position)
+            //Toast.makeText(view.context, "delete", Toast.LENGTH_SHORT).show()
+
         }
+
     }
+
 
     private fun showMoreActionsMenu(button: View, cancion:CancionData){
         val popupMenu = PopupMenu(this.view.context, button)
