@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.apilaravel.databinding.ItemBinding
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,11 +33,16 @@ class CancionViewHolder (val view: View, val listener:IOnItemClickListener): Rec
 
     fun bind(cancion:CancionData, position:Int){
         val cover = (0..7).random()
-        binding.ivCover.setImageResource(listCovers[0])
+        val urlImage = "https://los40.com/los40/imagenes/2017/04/06/album/1491501684_617106_1491503106_album_normal.jpg"
+        //binding.ivCover.setImageResource(listCovers[0])
+        Picasso.get().load(urlImage).into(binding.ivCover)
         binding.tvArtista.text = cancion.artista
         binding.tvTitle.text = cancion.titulo
         binding.mbRemove.setOnClickListener{
             listener.onItemClick(cancion, "delete", position)
+        }
+        binding.mbEdit.setOnClickListener{
+            listener.onItemClick(cancion, "edit", position)
         }
 
     }

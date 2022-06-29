@@ -1,9 +1,11 @@
 package com.apilaravel
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apilaravel.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -39,14 +41,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        //Log.d("TEST","SUFFLE: "+ Arrays.toString(cancionesList.toTypedArray()))
         adapter = CancionAdapter(cancionesList)
         binding.rvCanciones.layoutManager = LinearLayoutManager(this)
         binding.rvCanciones.adapter = adapter
 
         adapter.setOnClickListener(object:IOnItemClickListener{
             override fun onItemClick(cancion: CancionData, accion: String, position:Int) {
+                if(accion=="delete")
                 eliminarCancion(cancion, position)
+                else if (accion=="edit"){
+                    val intent = Intent(this@MainActivity, DetalleCancionActivity::class.java).also{
+                        it.putExtra("cancion",cancion)
+                        startActivity(it)
+                    }
+                }
             }
         })
     }
@@ -78,6 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun eliminarCancion(cancion:CancionData, position:Int){
+
         CoroutineScope(Dispatchers.IO).launch {
             val response: Response<Void> = CancionObject.ApiAdapter().deleteCancion(cancion!!.id)
             runOnUiThread {
